@@ -6,6 +6,7 @@ from tinymce import HTMLField
 
 User = get_user_model()
 
+
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField()
@@ -13,11 +14,13 @@ class Author(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Category(models.Model):
     title = models.CharField(max_length=20)
 
     def __str__(self):
         return self.title
+
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -40,3 +43,17 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'id': self.id
         })
+
+    @property
+    def get_comments(self):
+        return self.comments.all().order_by('-timestamp')
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
