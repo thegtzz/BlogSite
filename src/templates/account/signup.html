@@ -6,19 +6,25 @@
 
 {% block content %}
 
-<div class="col-5 offset-4">
+<div class="offset-4 mt-5 mb-5" style="border: darkgray solid 1px;
+                                       padding: 35px;
+                                       width: 400px">
 
-<h1>{% trans "Sign Up" %}</h1>
+<h4 style="color: darkgray; padding-left: 10px">{% trans "Sign Up" %}</h4>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+  <small><p style="padding-left: 10px">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p></small>
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <div class="col-11">
+    {{ form|crispy }}
+  </div>
+
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ '/' }}" />
+
+   <div class="btn-div pull-center col-11">
+    <button class="btn btn-primary btn-block" style="background-color: darkgray" type="submit">{% trans "Sign up" %}</button>
+  </div>
 </form>
 
 </div>
