@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Post, Author, PostView
 from .forms import CommentForm, PostForm
 from marketing.models import SignUp
+from marketing.forms import EmailSignupForm
 
 
 def get_author(user):
@@ -34,7 +35,7 @@ def get_category_count():
 def index(request):
     featured = Post.objects.filter(featured=True)
     latest = Post.objects.order_by('-timestamp')[0:3]
-
+    form = EmailSignupForm()
     if request.method == 'POST':
         email = request.POST['email']
         new_signup = SignUp()
@@ -44,6 +45,7 @@ def index(request):
     context = {
         'object_list': featured,
         'latest': latest,
+        'form': form,
     }
     return render(request, 'index.html', context)
 
