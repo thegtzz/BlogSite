@@ -1,7 +1,7 @@
 from django.db.models import Count, Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Post, Author, PostView
+from .models import Post, Author, PostView, Category
 from .forms import CommentForm, PostForm
 from marketing.models import SignUp
 from marketing.forms import EmailSignupForm
@@ -25,6 +25,14 @@ def search(request):
         'queryset': queryset
     }
     return render(request, 'search_results.html', context)
+
+
+def filter_by_category(request, category):
+    post_list = Post.objects.filter(categories__title=category)
+    context = {
+        'post_list': post_list
+    }
+    return render(request, 'post_by_category.html', context)
 
 
 def get_category_count():

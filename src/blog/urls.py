@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from post.views import index, blog, post, search, post_create, post_update, post_delete
+from post.views import index, blog, post, search, post_create, post_update, post_delete, filter_by_category
 from marketing.views import email_list_signup
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('', index),
     path('blog/', blog, name='post-list'),
     path('search/', search, name='search'),
+    path('blog/filter_by_category/<str:category>', filter_by_category, name='filter_by_category'),
     path('subscribe/', email_list_signup, name='subscribe'),
     path('create/', post_create, name='post-create'),
     path('post/<id>/', post, name='post-detail'),
