@@ -8,7 +8,17 @@
               <div class="col-md-8">
                 <form action="{% url 'search' %}">
                   <div class="form-group">
+                    {% csrf_token %}
                     <input type="search" name="q" id="search" placeholder="What are you looking for?">
+                    <ul id="search-results">
+                      {% if queryset.count > 0 %}
+                        {% for post in queryset %}
+                          <li><a>{{ post.title }}</a></li>
+                        {% endfor %}
+                      {% else %}
+                        <li>Nothing to show!</li>
+                      {% endif %}
+                    </ul>
                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
                   </div>
                 </form>
@@ -37,7 +47,11 @@
               </li>
               {% endif %}
             </ul>
-            <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+            <div class="navbar-text">
+              <a href="#" class="search-btn">
+                <i class="icon-search-1"></i>
+              </a>
+            </div>
             {% comment %} <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>
           </span><a href="#">ES</a></ul> {% endcomment %}
           </div>
