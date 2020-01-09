@@ -9,21 +9,9 @@
 
     {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-info alert-dismissable" style="position: absolute;
-                                                               left: 450px;
-                                                               top: 150px;
-                                                               display: block;
-                                                               padding: 5px 10px;
-                                                               width: 400px;
-                                                               height: 100px;
-                                                               background-color: #6c757d;
-                                                               border: none;
-                                                               color: #0e0e0e;
-                                                               border-radius: 3px;
-                                                               box-shadow: 0 0 10px 0 rgba(0,0,0,.41);
-                                                               z-index: 1;">
+        <div class="message alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4 style="padding: 35px 20px 20px;">{{ message }}</h4>
+            <h4 class="messageh4">{{ message }}</h4>
         {% endfor %}
         </div>
     {% endif %}

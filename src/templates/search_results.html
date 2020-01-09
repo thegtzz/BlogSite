@@ -2,36 +2,40 @@
 {% load static %}
 
 {% block content %}
-<div style="padding: 15px 0 15px 30px">
-  <h2>Your search result</h2>
-</div>
-  {% for post in queryset %}
-    <section class="featured-posts no-padding-top" style="padding-bottom: 15px">
-      <div class="container">
-        <div class="row d-flex align-items-stretch">
-          <div class="image col-lg-3" style="max-height: 100px; max-width: 250px"><img src="{{ post.thumbnail.url }}" alt="..."></div>
-          <div class="text col-lg-7">
-            <div class="text-inner d-flex align-items-center" style="max-height: 100px">
-              <div class="content">
-                <header class="post-header">
-                  <a href="{{ post.get_absolute_url }}">
-                    <h2 class="h4">{{ post.title }}</h2>
-                  </a>
-                </header>
-                <p>{{ post.overview }}</p>
-                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ post.author }}</span></div></a>
-                  <div class="date"><i class="icon-clock"></i>{{ post.timestamp|timesince }} ago</div>
-                  <div class="comments"><i class="icon-comment"></i>{{ post.comment_count }}</div>
-                </footer>
+{% if queryset.count > 0 %}
+  <div style="padding: 15px 0 15px 30px">
+    <h2>Your search result</h2>
+  </div>
+    {% for post in queryset %}
+      <section class="featured-posts no-padding-top" style="padding-bottom: 15px">
+        <div class="container">
+          <div class="row d-flex align-items-stretch">
+            <div class="image col-lg-3" style="max-height: 100px; max-width: 250px"><img src="{{ post.thumbnail.url }}" alt="..."></div>
+            <div class="text col-lg-7">
+              <div class="text-inner d-flex align-items-center" style="max-height: 100px">
+                <div class="content">
+                  <header class="post-header">
+                    <a href="{{ post.get_absolute_url }}">
+                      <h2 class="h4">{{ post.title }}</h2>
+                    </a>
+                  </header>
+                  <p>{{ post.overview }}</p>
+                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{ post.author }}</span></div></a>
+                    <div class="date"><i class="icon-clock"></i>{{ post.timestamp|timesince }} ago</div>
+                    <div class="comments"><i class="icon-comment"></i>{{ post.comment_count }}</div>
+                  </footer>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    {% endfor %}
 
-{% endfor %}
+{% else %}
+  <h1 class="offset-4 mb-5 mt-5">Nothing to show!</h1>
+{% endif %}
 
 {% endblock %}
