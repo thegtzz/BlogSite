@@ -13,10 +13,23 @@
                     <ul id="search-results">
                       {% if queryset.count > 0 %}
                         {% for post in queryset %}
-                          <li><a>{{ post.title }}</a></li>
+                          <section class="featured-posts no-padding-top" style="padding-bottom: 5px">
+                            <div class="container">
+                              <div class="row d-flex align-items-stretch">
+                                <div class="search-text text">
+                                  <div class="search-info-center d-flex align-items-center">
+                                    <div class="content">
+                                        <a href="{{ post.get_absolute_url }}">
+                                          <h6 class="h6-custom">{{ post.title }}</h6>
+                                            <small class="small-custom">{{ post.timestamp }}</small>
+                                        </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
                         {% endfor %}
-                      {% else %}
-                        <li>Nothing to show!</li>
                       {% endif %}
                     </ul>
                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
